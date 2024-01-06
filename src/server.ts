@@ -2,20 +2,25 @@ import express from 'express'
 import {randomUUID} from "node:crypto"
 import cors from "cors"
 
+interface Book{
+  id: string
+  title: string
+  description: string
+}
+
 const app = express()
 app.use(express.json())
 app.use(cors())
 
 const port = process.env.PORT ?? 4000
 
-const books = [{
+const books:Book[] = [{
     id: randomUUID(),
     title: "Alice",
     description: ""
   }]
 
 app.get('/books', async (request, response) => {
-  // const books = await prismaClient.book.findMany()
   
   return response.json(books)
 })
